@@ -13,66 +13,10 @@ echo "FINAL SETUP AND CONFIGURATION"
 # ------------------------------------------------------------------------
 
 echo
-echo "Genaerating .xinitrc file"
-
-# Generate the .xinitrc file so we can launch XFCE from the
-# terminal using the "startx" command
-cat <<EOF > ${HOME}/.xinitrc
-#!/bin/bash
-
-if [ -d /etc/X11/xinit/xinitrc.d ] ; then
-    for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
-        [ -x "\$f" ] && . "\$f"
-    done
-    unset f
-fi
-
-source /etc/xdg/xfce4/xinitrc
-exit 0
-EOF
-
-# ------------------------------------------------------------------------
-
-echo
-echo "Updating /bin/startx to use the correct path"
-
-# By default, startx incorrectly looks for the .serverauth file in our HOME folder.
-sudo sed -i 's|xserverauthfile=\$HOME/.serverauth.\$\$|xserverauthfile=\$XAUTHORITY|g' /bin/startx
-
-# ------------------------------------------------------------------------
-
-echo
-echo "Configuring LTS Kernel as a secondary boot option"
-
-sudo cp /boot/loader/entries/arch.conf /boot/loader/entries/arch-lts.conf
-sudo sed -i 's|Arch Linux|Arch Linux LTS Kernel|g' /boot/loader/entries/arch-lts.conf
-sudo sed -i 's|vmlinuz-linux|vmlinuz-linux-lts|g' /boot/loader/entries/arch-lts.conf
-sudo sed -i 's|initramfs-linux.img|initramfs-linux-lts.img|g' /boot/loader/entries/arch-lts.conf
-
-# ------------------------------------------------------------------------
-
-echo
 echo "Configuring MAKEPKG to use all 8 cores"
 
 sudo sed -i -e 's|[#]*MAKEFLAGS=.*|MAKEFLAGS="-j$(nproc)"|g' makepkg.conf
 sudo sed -i -e 's|[#]*COMPRESSXZ=.*|COMPRESSXZ=(xz -c -T 8 -z -)|g' makepkg.conf
-
-# ------------------------------------------------------------------------
-
-echo
-echo "Configuring vconsole.conf to set a larger font for login shell"
-
-sudo cat <<EOF > /etc/vconsole.conf
-KEYMAP=us
-FONT=ter-v32b
-EOF
-
-# ------------------------------------------------------------------------
-
-echo
-echo "Setting laptop lid close to suspend"
-
-sudo sed -i -e 's|[# ]*HandleLidSwitch[ ]*=[ ]*.*|HandleLidSwitch=suspend|g' /etc/systemd/logind.conf
 
 # ------------------------------------------------------------------------
 
@@ -92,15 +36,6 @@ echo "Increasing file watcher count"
 
 # This prevents a "too many files" error in Visual Studio Code
 echo fs.inotify.max_user_watches=524288 | sudo tee /etc/sysctl.d/40-max-user-watches.conf && sudo sysctl --system
-
-# ------------------------------------------------------------------------
-
-echo
-echo "Disabling Pulse .esd_auth module"
-
-# Pulse audio loads the `esound-protocol` module, which best I can tell is rarely needed.
-# That module creates a file called `.esd_auth` in the home directory which I'd prefer to not be there. So...
-sudo sed -i 's|load-module module-esound-protocol-unix|#load-module module-esound-protocol-unix|g' /etc/pulse/default.pa
 
 # ------------------------------------------------------------------------
 
@@ -128,29 +63,33 @@ sudo ntpd -qg
 sudo systemctl enable ntpd.service
 sudo systemctl start ntpd.service
 
-# ------------------------------------------------------------------------
+# -------------------------------------------------------------------------
 
-echo
-echo "NETWORK SETUP"
-echo
-echo "Find your IP Link name:"
-echo
-
-ip link
-
-echo
-read -p "ENTER YOUR IP LINK: " LINK
-
-echo
-echo "Disabling DHCP and enabling Network Manager daemon"
-echo
-
+echo ""
+echo "Starting NetworkManager"
 sudo systemctl disable dhcpcd.service
 sudo systemctl stop dhcpcd.service
-sudo ip link set dev ${LINK} down
-sudo systemctl enable NetworkManager.service
-sudo systemctl start NetworkManager.service
-sudo ip link set dev ${LINK} up
+sudo systemctl enable --now NetworkManager.service
+
+# -------------------------------------------------------------------------
+
+echo
+echo "Configuring Dotfiles and configs"
+
+sudo echo "SATA_LINKPWR_ON_BAT=max_performance" >> /etc/tlp.conf
+sudo tlp-start
+sudo sed --in-place "s/#EnableAUR/EnableAUR/" "/etc/pamac.conf"
+sudo sed --in-place "s/#CheckAURUpdates/CheckAURUpdates/" "/etc/pamac.conf"
+usermod -aG adbusers
+mkdir ~/.npm-packages
+
+git clone https://github.com/Akio333/dotfiles.git ~/.config
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Linking stuff
+rm -rf ~/.nano
+ln -sf ~/.config/nano ~/.nano
+ln -sf ~/.config/zshrc ~/.zshrc
 
 echo "Done!"
 echo 

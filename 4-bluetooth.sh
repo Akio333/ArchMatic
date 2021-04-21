@@ -29,6 +29,8 @@ for PKG in "${PKGS[@]}"; do
     sudo pacman -S "$PKG" --noconfirm --needed
 done
 
+systemctl enable bluetooth
+
 echo
 echo "Done!"
 echo

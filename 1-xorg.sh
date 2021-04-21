@@ -12,6 +12,7 @@ echo "INSTALLING XORG"
 echo
 
 PKGS=(
+        'xorg'                  # Entire Xorg group
         'xorg-server'           # XOrg server
         'xorg-apps'             # XOrg apps group
         'xorg-xinit'            # XOrg init

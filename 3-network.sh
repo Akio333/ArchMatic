@@ -28,6 +28,10 @@ for PKG in "${PKGS[@]}"; do
     sudo pacman -S "$PKG" --noconfirm --needed
 done
 
+sudo systemctl disable dhcpcd.service
+sudo systemctl stop dhcpcd.service
+sudo systemctl enable --now NetworkManager.service
+
 echo
 echo "Done!"
 echo

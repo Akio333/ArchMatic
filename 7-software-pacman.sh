@@ -45,7 +45,10 @@ PKGS=(
     'unrar'                 # RAR compression program
     'unzip'                 # Zip compression program
     'wget'                  # Remote content retrieval
-    'xfce4-terminal'        # Terminal emulator
+    'xclip'                 # Clipboard Utility
+    'kitty'                 # Terminal emulator
+    'android-tools'         # adb and fastboot drivers
+    'android-udev'          # udev rules for android devices
     'zenity'                # Display graphical dialog boxes via shell scripts
     'zip'                   # Zip compression program
     'zsh'                   # ZSH shell
@@ -58,7 +61,11 @@ PKGS=(
     'gparted'               # Disk utility
     'gnome-disks'           # Disk utility
     'ntfs-3g'               # Open source implementation of NTFS file system
-    'parted'                # Disk utility
+    'btrfs-progs'           # BtrFS support
+    'grub-btrfs'            # btrfs snapshot booting support for grub
+    'mtpfs'                 # mobile filesystem
+    'gvfs-mtp'              # mtp backend android, media players
+    'libmtp'                # mtp library
 
     # GENERAL UTILITIES ---------------------------------------------------
 
@@ -67,55 +74,41 @@ PKGS=(
     'nemo'                  # Filesystem browser
     'veracrypt'             # Disc encryption utility
     'variety'               # Wallpaper changer
-    'xfburn'                # CD burning application
 
     # DEVELOPMENT ---------------------------------------------------------
 
-    'atom'                  # Text editor
-    'apache'                # Apache web server
     'clang'                 # C Lang compiler
     'cmake'                 # Cross-platform open-source make system
-    'electron'              # Cross-platform development using Javascript
     'git'                   # Version control system
     'gcc'                   # C/C++ compiler
     'glibc'                 # C libraries
-    'mariadb'               # Drop-in replacement for MySQL
     'meld'                  # File/directory comparison
     'nodejs'                # Javascript runtime environment
     'npm'                   # Node package manager
     'php'                   # Web application scripting language
-    'php-apache'            # Apache PHP driver
     'postfix'               # SMTP mail server
     'python'                # Scripting language
-    'qtcreator'             # C++ cross platform IDE
-    'qt5-examples'          # Project demos for Qt
     'yarn'                  # Dependency management (Hyper needs this)
 
     # WEB TOOLS -----------------------------------------------------------
 
     'chromium'              # Web browser
-    'firefox'               # Web browser
-    'filezilla'             # FTP Client
     'flashplugin'           # Flash
 
     # COMMUNICATIONS ------------------------------------------------------
 
-    'hexchat'               # Multi format chat
-    'irssi'                 # Terminal based IIRC
+    'telegram-desktop'      # Telegram
 
     # MEDIA ---------------------------------------------------------------
 
     'lollypop'              # Music player
     'simplescreenrecorder'  # Record your screen
     'vlc'                   # Video player
-    'xfce4-screenshooter'   # Screen capture.
+    'flameshot'             # Screenshot tool
 
     # GRAPHICS AND DESIGN -------------------------------------------------
 
     'gcolor2'               # Colorpicker
-    'gimp'                  # GNU Image Manipulation Program
-    'inkscape'              # Vector image creation app
-    'imagemagick'           # Command line image manipulation tool
     'nomacs'                # Image viewer
     'pngcrush'              # Tools for optimizing PNG images
     'ristretto'             # Multi image viewer
@@ -133,6 +126,15 @@ PKGS=(
 
     'virtualbox'
     'virtualbox-host-modules-arch'
+
+    # BACKUP AND RESTORE --------------------------------------------------
+    'timeshift'             # Snapshotting tool
+    'timeshift-autosnap'    # Automatic snapshot before system upgrade
+
+    # UTILITIES -----------------------------------------------------------
+    'tlp'                   # Laptop  Power tools
+    'xfce4-power-manager'   # Power Manager
+
 )
 
 for PKG in "${PKGS[@]}"; do

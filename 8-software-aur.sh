@@ -19,49 +19,22 @@ git clone "https://github.com/rickellis/AURIC.git"
 
 PKGS=(
 
-    # SYSTEM UTILITIES ----------------------------------------------------
-
-    'menulibre'                 # Menu editor
-    'gtkhash'                   # Checksum verifier
-
-    # TERMINAL UTILITIES --------------------------------------------------
-
-    'hyper'                     # Terminal emulator built on Electron
-
     # UTILITIES -----------------------------------------------------------
 
-    'dropbox'                   # Cloud file storage
-    'enpass-bin'                # Password manager
     'slimlock'                  # Screen locker
-    'oomox'                     # Theme editor
 
     # DEVELOPMENT ---------------------------------------------------------
     
     'visual-studio-code-bin'    # Kickass text editor
 
-    # MEDIA ---------------------------------------------------------------
+    # SOFTWARE MANAGER ----------------------------------------------------
 
-    'spotify'                   # Music player
-    'screenkey'                 # Screencast your keypresses
-    # 'aftershotpro3'             # Photo editor
+    'pamac-aur'                 # Best software manager for archlinux
 
-    # POST PRODUCTION -----------------------------------------------------
+    # OFFICE --------------------------------------------------------------
 
-    'peek'                      # GIF animation screen recorder
+    'freeoffice'
 
-    # COMMUNICATIONS ------------------------------------------------------
-
-    'skypeforlinux-stable-bin'  # Skype
-
-    # THEMES --------------------------------------------------------------
-
-    'gtk-theme-arc-git'
-    'adapta-gtk-theme-git'
-    'paper-icon-theme'
-    'tango-icon-theme'
-    'tango-icon-theme-extras'
-    'numix-icon-theme-git'
-    'sardi-icons'
 )
 
 
