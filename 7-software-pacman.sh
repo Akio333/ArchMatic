@@ -16,6 +16,7 @@ PKGS=(
     # SYSTEM --------------------------------------------------------------
 
     'linux-lts'             # Long term support kernel
+    'crda'                  # Set correct wireless channels for your country
 
     # TERMINAL UTILITIES --------------------------------------------------
 

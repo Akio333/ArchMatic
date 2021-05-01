@@ -22,6 +22,8 @@ PKGS=(
     # UTILITIES -----------------------------------------------------------
 
     'slimlock'                  # Screen locker
+    'i3lock-fancy'              # lockscreen
+    'xshkd'                     # simple x hotkey daemon
 
     # DEVELOPMENT ---------------------------------------------------------
     

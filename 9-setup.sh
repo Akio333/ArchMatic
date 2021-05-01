@@ -83,7 +83,8 @@ sudo sed --in-place "s/#CheckAURUpdates/CheckAURUpdates/" "/etc/pamac.conf"
 usermod -aG adbusers
 mkdir ~/.npm-packages
 
-git clone https://github.com/Akio333/dotfiles.git ~/.config
+git clone https://github.com/Akio333/dotfiles.git
+cp -rfv ~/dotfiles/ ~/.config/
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Linking stuff
