@@ -33,8 +33,6 @@ PKGS=(
         'papirus-icon-theme'      # Papirus Icon theme
         'breeze'                  # QT theme
         'font-manager'            # Simple font management app
-        'i3lock-fancy'            # lockscreen
-        'xshkd'                   # simple x hotkey daemon
         'xterm'                   # Fallback terminal
         'xorg-xbacklight'         # Backlight control
         'plank'                   # Dock
